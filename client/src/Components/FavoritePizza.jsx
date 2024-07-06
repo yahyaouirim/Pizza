@@ -82,10 +82,13 @@ const FavoritePizza = () => {
                 setQuantity(0);
                 setToppings([]);
                 setErrors({});
+                alert(" A new order created !!!");
                 axios.patch(`http://localhost:5000/api/updateUser/${idLocal}`, { numOrder: user.numOrder + 1 }, { withCredentials: true })
                     .then((res) => {
                         console.log(res.data);
                         setUser(res.data);
+                        navigate("/allOrders");
+
                     })
                     .catch((err) => {
                         console.log(err);
@@ -107,11 +110,12 @@ const FavoritePizza = () => {
         }
 
     return (
-            <Container >
+            <div >
                 <NavComponents />
-                <Row>
+                <Row className='mx-auto g-3' style={{width:"85%"}}>
                     <Col md={6}>
-                        <form className=' text-primary  mx-auto mt-5 mb-3 rounded-3 p-4 gap-3' style={shadow} onSubmit={submitHandler}>
+                        <form className='mx-auto mt-5 mb-3 rounded-3 p-4 gap-3 shadow-lg' onSubmit={submitHandler}>
+                            <h3 className='text-center mb-3 text-danger'>Choose Your Favorite Pizza</h3>
                             <Row>
                                 <Col sm={12} md={12}>
                                     <label htmlFor='method'>Method: </label>
@@ -276,32 +280,33 @@ const FavoritePizza = () => {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><button className=' col-12 mx-auto btn btn-outline-primary mt-2'>Add To Order</button></Col>
+                                <Col><button className=' col-12 mx-auto btn btn-warning mt-3'>Add To Order</button></Col>
                             </Row>
                         </form>
 
                     </Col>
                     <Col md={6}>
-                        <h1>Favorites Orders</h1>
+                        <h2 className='text-danger'>Favorites Orders</h2>
                         {
                             orders.map((ord) => (
                                 <Row key={ord._id}>
                                     <Col md={12} className='g-3 mb-3'>
-                                        <Card onClick={(e) => { getFavorite(e, ord._id) }} bg="dark" text="white" border="primary">
+                                        <Card className='bg-white' onClick={(e) => { getFavorite(e, ord._id) }} >
                                             <Card.Body>
-                                                <Card.Text> {ord.method}, {ord.quantity}, {ord.size} </Card.Text>
-                                                <Card.Text>{ord.toppings.join(", ")}</Card.Text>
-                                                <Card.Text> {ord.crust} </Card.Text>
+                                                <Card.Text>Method:  {ord.method}, Quantity: {ord.quantity}, Size: {ord.size} </Card.Text>
+                                                <Card.Text>Toppings: {ord.toppings.join(", ")}</Card.Text>
+                                                <Card.Text> Crust: {ord.crust} </Card.Text>
                                                 <Card.Text className="me-auto">PRICE: {ord.Pricetax}</Card.Text>
+                                                <hr></hr>
                                                 <Form>
-                                                    <Form.Check
-                                                        inline
+                                                    <Form.Check className='text-danger'
+                                                        
                                                         label="Favorite"
                                                         type='checkbox'
                                                         checked={ord.isFavorite}
                                                         defaultChecked
                                                     />
-                                                </Form>                                                    <hr></hr>
+                                                </Form>
                                             </Card.Body>
                                         </Card>
                                     </Col>
@@ -313,7 +318,7 @@ const FavoritePizza = () => {
                 </Row>
 
 
-            </Container>
+            </div>
         )
     }
 

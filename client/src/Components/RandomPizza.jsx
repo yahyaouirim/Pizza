@@ -70,11 +70,13 @@ axios.post(`http://localhost:5000/api/createPizza`,
         setQuantity(0);
         setToppings([]);
         setErrors({});        
-        
+        alert(" A new order created !!!");
         axios.patch(`http://localhost:5000/api/updateUser/${idLocal}`, { numOrder: user.numOrder+1 }, { withCredentials: true })
             .then((res) => {
                 console.log("user data=================",res.data);
                 setUser(res.data);
+                navigate("/allOrders");
+
             })
             .catch((err) => {
                 console.log(err);
@@ -95,11 +97,12 @@ axios.post(`http://localhost:5000/api/createPizza`,
 }
 
   return (
-    <div className='container mb-3'>
+    <div className='mb-3'>
     <NavComponents />
     <Row>
         <Col className='mx-auto' md={6}>
-            <form className=' text-primary  mx-auto mt-5 mb-3 rounded-3 p-4 gap-3' style={shadow} onSubmit={submitHandler}>
+            <form className='shadow-lg mx-auto mt-5 mb-3 rounded-3 p-4 gap-3' onSubmit={submitHandler}>
+                <h3 className='text-center text-danger'>Surprise Me</h3>
                 <Row>
                     <Col sm={12} md={12}>
                         <label htmlFor='method'>Method: </label>
@@ -148,7 +151,11 @@ axios.post(`http://localhost:5000/api/createPizza`,
                     <Col sm={12} md={4}>
                         <label htmlFor='quantity'>Qty: </label>
                         <input type=" number" name='quantity' className='form-select' onChange={(e) => { setQuantity(e.target.value) }} value={quantity} />
-                       
+                        {
+                            errors.quantity ?
+                                <p className='text-danger'>{errors.quantity.message}</p>
+                                : null
+                        }
                     </Col>
                 </Row>
                 <Row>
@@ -266,8 +273,8 @@ axios.post(`http://localhost:5000/api/createPizza`,
                     </Col>
                 </Row>
                 <Row>
-                    <Col><button className=' col-12 mx-auto btn btn-outline-primary mt-2'>Add To Order</button></Col>
-                    <Col><button onClick={randomValues} className=' col-12 mx-auto btn btn-outline-primary mt-2'>Surprise Me</button></Col>
+                    <Col><button className=' col-12 mx-auto btn btn-primary mt-3'>Add To Order</button></Col>
+                    <Col><button onClick={randomValues} className=' col-12 mx-auto btn btn-primary mt-3'>Surprise Me</button></Col>
 
                 </Row>
             </form>

@@ -4,6 +4,8 @@ import { Nav, Navbar, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserPContext } from '../Context/UserPContext';
+import logo from '../Assets/logopizza.png';
+
 
 const NavComponents = () => {
     const { user,setUser } = useContext(UserPContext);
@@ -34,16 +36,16 @@ const NavComponents = () => {
     };
 
     return (
-        <div>
-            <Navbar bg="light" expand="lg">
-            <Container fluid>
-                <Navbar.Brand href="#"><h1>PIZZA Dragon</h1></Navbar.Brand>
+        <div className='mb-3' style={{boxShadow:"rgba(0, 0, 0, 0.3) 0px 3px 5px 0px"}}>
+            <Navbar bg="white" expand="lg">
+            <Container>
+                <Navbar.Brand href="#"><img src={logo} style={{width:"200px", height:"70px"}}></img></Navbar.Brand>
                 {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
                 <Navbar.Collapse id="navbarScroll" className="justify-content-end">
 
-                    <Nav className="justify-content-end gap-5 text-white" defaultActiveKey="/home">
+                    <Nav className="justify-content-end gap-5 text-white fs-5 fst-italic" defaultActiveKey="/home">
                             <Nav.Link  onClick={() => navigate("/home")}>Home</Nav.Link>
                             <Nav.Link  onClick={() => navigate("/allOrders")}>Order ({user.numOrder}) </Nav.Link>
                             <Nav.Link  onClick = {() => navigate("/account")}>Account</Nav.Link>

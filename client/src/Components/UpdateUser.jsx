@@ -7,7 +7,7 @@ import { UserPContext } from '../Context/UserPContext';
 const UpdateUser = (props) => {
     const idLocal = window.localStorage.getItem("userId");
     const { user, setUser } = useContext(UserPContext);
-    const shadow = { boxShadow: "0 0 20px rgba(0, 123, 255, 0.5)" }
+    const shadow = { boxShadow: "0 0 10px rgba(0,0,0, 0.3)" }
     const navigate = useNavigate();
     const [errors, setErrors] = useState({}); // Change to an empty object
 
@@ -42,15 +42,15 @@ const UpdateUser = (props) => {
             })
     }
     return (
-        <div >
-            <h1>Account Info</h1>
+        <div className='mt-3 '>
+            <h2 className='text-danger text-center'>Account Info</h2>
             <Row>
                 <Col className='me-3'>
-                    <form className=' text-primary  mx-auto mt-5 rounded-3 p-4 gap-3' style={shadow} onSubmit={submitHandler}>
+                    <form className='bg-white mx-auto mt-3 rounded-3 p-4 gap-3 shadow' onSubmit={submitHandler}>
 
                         <Row>
                             <Col sm={12}>
-                                <label htmlFor='firstName'>First Name: </label>
+                                <label htmlFor='firstName'className='fw-bold'>First Name: </label>
                                 <input type="text" className=' mx-auto form-control '  value={user.firstName} onChange={handleChange} name='firstName' />
                                 {
                                     errors.firstName ?
@@ -59,7 +59,7 @@ const UpdateUser = (props) => {
                                 }
                             </Col>
                             <Col sm={12}>
-                                <label htmlFor='lastName'>Last Name: </label>
+                                <label htmlFor='lastName' className='fw-bold'>Last Name: </label>
                                 <input type="text" className=' mx-auto form-control'  value={user.lastName} onChange={handleChange} name='lastName' />
                                 {
                                     errors.lastName ?
@@ -71,7 +71,7 @@ const UpdateUser = (props) => {
                         </Row>
                         <Row>
                             <Col sm={12}>
-                                <label htmlFor='email'>Email: </label>
+                                <label htmlFor='email' className='fw-bold'>Email: </label>
                                 <input type="text" className=' mx-auto form-control' value={user.email} onChange={handleChange}  name='email' />
                                 {
                                     errors.email ?
@@ -80,7 +80,7 @@ const UpdateUser = (props) => {
                                 }
                             </Col>
                             <Col sm={12}>
-                                <label htmlFor='address'>Address: </label>
+                                <label htmlFor='address' className='fw-bold'>Address: </label>
                                 <input type="text" className='form-control' value={user.address} onChange={handleChange}  name='address' />
                                 {
                                     errors.address ?
@@ -92,7 +92,7 @@ const UpdateUser = (props) => {
                         </Row>
                         <Row>
                             <Col sm={12}>
-                                <label htmlFor='city'>City: </label>
+                                <label htmlFor='city' className='fw-bold'>City: </label>
                                 <input type="text" className=' form-control' value={user.city} onChange={handleChange}  name='city' />
                                 {
                                     errors.city ?
@@ -101,7 +101,7 @@ const UpdateUser = (props) => {
                                 }
                             </Col>
                             <Col sm={12}>
-                                <label htmlFor='state'>State: </label>
+                                <label htmlFor='state' className='fw-bold'>State: </label>
                                 <select name='state' className='form-select' value={user.state}  onChange={handleChange} aria-label="Default select example">
                                     <option value="one">State 1</option>
                                     <option value="two">State2</option>
@@ -116,7 +116,7 @@ const UpdateUser = (props) => {
                             </Col>
                         </Row>
                         <Row>
-                            <Col><button className=' col-12 mx-auto btn btn-outline-primary mt-2'>Update</button></Col>
+                            <Col><button className=' col-12 mx-auto btn btn-warning mt-4'>Update</button></Col>
                         </Row>
                     </form>
                 </Col>

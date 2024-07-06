@@ -44,6 +44,8 @@ const submitHandler = (e) => {
             setQuantity(0);
             setToppings([]);
             setErrors({});
+            alert("You order is created !!!");
+
 
             axios.patch(`http://localhost:5000/api/updateUser/${idLocal}`, { numOrder: user.numOrder + 1 }, { withCredentials : true })
 
@@ -73,11 +75,12 @@ const submitHandler = (e) => {
 
 
     return (
-        <div className='container mb-3'>
+        <div className='mb-3'>
             <NavComponents />
             <Row>
                 <Col className='mx-auto' md={6}>
-                    <form className=' text-primary  mx-auto mt-5 mb-3 rounded-3 p-4 gap-3' style={shadow} onSubmit={submitHandler}>
+                    <form className=' shadow-lg mx-auto mt-5 mb-3 rounded-3 p-4 gap-3' onSubmit={submitHandler}>
+                        <h2 className='text-danger text-center'>Craft Your Pizza</h2>
                         <Row>
                             <Col sm={12} md={12}>
                                 <label htmlFor='method'>Method: </label>
@@ -238,7 +241,7 @@ const submitHandler = (e) => {
                             </Col>
                         </Row>
                         <Row>
-                            <Col><button className=' col-12 mx-auto btn btn-outline-primary mt-2'>Add To Order</button></Col>
+                            <Col><button className=' col-12 mt-3 mx-auto btn btn-primary mt-2'>Add To Order</button></Col>
                         </Row>
                     </form>
                 </Col>

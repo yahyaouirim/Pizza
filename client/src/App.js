@@ -48,10 +48,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <div className=" min-vh-100 pb-5">
-          <ToggleButton className='btn btn-outline-primary' onClick={toggleTheme}>
+          {/* <ToggleButton className='btn btn-outline-primary' onClick={toggleTheme}>
         {theme === LightTheme ? '☾' : '☀ '}
       </ToggleButton>
-    
+     */}
       <Routes>
         <Route path='/' element={<Login />}/>
         <Route path="/register" element={<Register />} />

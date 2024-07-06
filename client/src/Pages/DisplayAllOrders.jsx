@@ -9,7 +9,6 @@ const DisplayAllOrders = () => {
     const idLocal = window.localStorage.getItem("userId");
     const { user, setUser } = useContext(UserPContext);
     const navigate = useNavigate();
-    const shadow = { boxShadow: "0 0 20px rgba(0, 123, 255, 0.5)" };    
     //display Orders
     useEffect(() => {
         axios.get(`http://localhost:5000/api/pizzas/${idLocal}`,{ withCredentials: true })
@@ -64,31 +63,33 @@ const purchase = (e, idp) => {
   };
   
   return (
-    <div>
+    <div className='mb-5'>
         <NavComponents />
         {
                 orders.map((ord) =>(
                 <div key={ord._id}>
                      <Row  xs={1} md={3}>
                         <Col  className='mx-auto p-2 mb-2'>
-                            <Card  bg="dark" text="white" border="primary" style={shadow}>
+                            <Card  bg="white" className='shadow-lg'>
+ 
                                 <Card.Body>
-                                    <Card.Title>Your Order</Card.Title>
+                                    <Card.Title className='text-danger'>Your Order</Card.Title>
                                     <Card.Text>  Method: {ord.method}</Card.Text>
                                     <Card.Text>Size: {ord.size}</Card.Text>
                                     <Card.Text>Crust: {ord.crust} </Card.Text>
                                     <Card.Text>Toppings: {ord.toppings.join(", ")}</Card.Text>
                                     <Card.Text>Quantity:{ord.quantity}</Card.Text>
+                                    <hr className="w-100"></hr>
 
-                                    <Card.Text className="float-end">PRICE: {ord.totalPrice}</Card.Text>
-                                    <hr></hr>
-                                    <Card.Text >Tax : 19%</Card.Text>
-                                    <hr></hr>
-                                    <Card.Text className="float-end">TOTAL: {(ord.totalPrice + ord.totalPrice * 0.19)}</Card.Text>
+                                    <Card.Text className="float-end">PRICE: {ord.totalPrice}$</Card.Text>
+                                    <hr className='w-100'></hr>
+                                    <Card.Text className="float-end" >Tax : 19%</Card.Text>
+                                    <hr className='w-100'></hr>
+                                    <Card.Text className="float-end">TOTAL: {(ord.totalPrice + ord.totalPrice * 0.19)}$</Card.Text>
                                 </Card.Body>
-                                <Card.Footer >
-                                    <Button onClick={(e) =>{deleteOrder(e,ord._id)}} variant="outline-danger">START-OVER</Button>
-                                    <Button onClick={(e)=>{ purchase(e,ord._id)}} variant="outline-primary">PURCHASE</Button>
+                                <Card.Footer className='d-flex justify-content-between' >
+                                    <Button onClick={(e) =>{deleteOrder(e,ord._id)}} variant="danger">START-OVER</Button>
+                                    <Button onClick={(e)=>{ purchase(e,ord._id)}} variant="primary">PURCHASE</Button>
                                 </Card.Footer>
                             </Card>
                         </Col>
